@@ -13,7 +13,7 @@ export const Home = () => {
 
 	return (
 		<div className="flex flex-col items-center h-auto">
-			<Toolbar selected="Home" searchActive={false} />
+			<Toolbar selected="Home" searchActive={false} isLight={true} />
 			<div className="flex flex-col items-start p-6">
 				<h1 className="text-4xl font-bold mt-12">Welcome to GameDB</h1>
 				<p className="text-xl mt-4">The best place to find information about your favorite games!</p>
