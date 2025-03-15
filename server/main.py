@@ -1,5 +1,6 @@
 import requests
 from flask import Flask, request, jsonify
+from flask_cors import CORS
 import os
 from dotenv import load_dotenv
 
@@ -8,6 +9,7 @@ load_dotenv()
 client_id=os.getenv('CLIENTID') 
 client_secret=os.getenv('CLIENTSECRET')
 app = Flask(__name__)
+CORS(app)
 
 @app.route("/")
 def hello_world():
