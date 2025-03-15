@@ -35,7 +35,7 @@ export const Game = () => {
 				<img src='https://images.igdb.com/igdb/image/upload/t_cover_big/co4jni.webp' className='absolute w-full z-0 top-0 left-0'></img>
 			</div>
 			<div className='absolute  w-full z-10'>
-				<div className='w-full h-auto bg-[#F4EDED]'><Toolbar searchActive={true} selected='Game' /></div>
+				<div className='w-full h-auto bg-[#0D0D0D]'><Toolbar searchActive={true} selected='Game' isLight={false} /></div>
 				<div className='flex flex-col items-center'>
 					<div className='w-full h-100 flex flex-row items-end justify-start pl-40 z-20'>
 						<img className="translate-y-30 rounded-xl" src={"https://images.igdb.com/igdb/image/upload/t_cover_big/co4jni.webp"} alt='game cover' />
