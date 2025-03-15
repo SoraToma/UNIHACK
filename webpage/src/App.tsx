@@ -5,7 +5,7 @@ import { Game } from "./pages/Game";
 
 function App() {
   return (
-    <div className="h-auto w-full bg-[#F4EDED]">
+    <div className="min-h-screen w-full bg-[#F4EDED]">
       <Routes>
         <Route path="/" element={<Home />} />
         <Route path="/auth" element={<Home />} />

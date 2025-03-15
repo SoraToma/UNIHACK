@@ -5,8 +5,9 @@ export const Home = () => {
 	const [searchQuery, setSearchQuery] = useState("")
 
 	const searchGame = async () => {
-		const response = await fetch(`https://unihack-532x.onrender.com/searchgame?game=${searchQuery}`)
+		const response = await fetch(`https://unihack-532x.onrender.com/search-game?game=${searchQuery}`)
 			.then(response => response.json())
+		console.log(response)
 		window.location.href = `/games/${response[0].id}`
 	} 
 
