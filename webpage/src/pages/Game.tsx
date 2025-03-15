@@ -4,7 +4,7 @@ import { useParams } from 'react-router-dom';
 
 export const Game = () => {
 	const { gameId } = useParams();
-	const [gameData, setGameData] = useState<{ name?: string, created_at?: number }>({});
+	const [gameData, setGameData] = useState<{ name?: string, created_at?: number, summary?: string, storyline?: string }>({});
 	const [gameInfo, setGameInfo] = useState<{ release_date?: string }>({});
 
 	useEffect(() => {
@@ -38,21 +38,29 @@ export const Game = () => {
 				<div className='w-full h-auto bg-[#F4EDED]'><Toolbar searchActive={true} selected='Game' /></div>
 				<div className='flex flex-col items-center'>
 					<div className='w-full h-100 flex flex-row items-end justify-start pl-40 z-20'>
-						<img className="translate-y-30 rounded-sm" src={"https://images.igdb.com/igdb/image/upload/t_cover_big/co4jni.webp"} alt='game cover' />
-						<p className='pl-8 text-5xl text-[#F4EDED] font-bold'>{gameData.name}</p>
+						<img className="translate-y-30 rounded-xl" src={"https://images.igdb.com/igdb/image/upload/t_cover_big/co4jni.webp"} alt='game cover' />
+						<p className='pl-8 pb-5 text-5xl text-[#F4EDED] font-bold'>{gameData.name}</p>
 					</div>
-					<div className='bg-[#464D77] w-full h-40'>
-						<div className='flex flex-row pl-110 pt-8 items-start gap-x-10'>
+					<div className='bg-[#464D77] w-full h-20'>
+						<div className='flex flex-row pl-115 pt-8 items-start gap-x-10'>
 							<p className='text-lg text-[#F4EDED] font-bold'>Release Date: {gameInfo.release_date}</p>
 							<p className='text-lg text-[#F4EDED] font-bold'>Publisher: FromSoftware</p>
 						</div>
 					</div>
-					<div className='bg-[#464D77] w-full h-100'>
-						<div className='flex flex-col pl-10 items-start gap-y-5'>
-							<p className='text-5xl text-[#F4EDED] font-bold'>{gameData.name}</p>
-							<p className='text-lg text-[#F4EDED] font-bold'>FromSoftware</p>
+					<div className='bg-[#464D77] w-full h-auto p-20'>
+						<div className='flex flex-col m-auto w-9/10 items-start gap-y-2'>
+							<h1 className='text-3xl text-[#F4EDED] font-bold' >Summary</h1>
+							<p className='pt-2 text-lg text-[#F4EDED] '>{gameData.summary}</p>
+							{
+								gameData.storyline ? 
+								<>
+									<h1 className='pt-5 text-3xl text-[#F4EDED] font-bold' >Storyline</h1>
+									<p className='text-lg text-[#F4EDED]'>{gameData.storyline}</p>
+								</>
+								: null
+							}	
 						</div>
-					</div>				
+					</div>
 				</div>
 				<pre>{JSON.stringify(gameData, null, 2)}</pre>
 			</div>
