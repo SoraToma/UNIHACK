@@ -1,4 +1,4 @@
-import { useEffect, useState } from "react"
+import { useEffect, useState, useRef } from "react"
 import { supabase, useSupabase } from "@/providers/supabaseProvider"
 import { User } from "@supabase/supabase-js"
 import { Avatar, AvatarFallback, AvatarImage } from "./ui/avatar"
@@ -10,6 +10,36 @@ export const Toolbar = ({selected, searchActive, isLight} : {selected : string, 
 	const { signOut } = useSupabase()
 
 	const [user, setUser] = useState<User | null>(null)
+	const [searchResults, setSearchResults] = useState([])
+	const [searchQuery, setSearchQuery] = useState("")
+	const timeoutRef = useRef<NodeJS.Timeout | null>(null)
+
+	const searchGame = async (query: string) => {
+		const response = await fetch(`https://unihack-532x.onrender.com/search-game?game=${query}`)
+			.then(response => response.json())
+		setSearchResults(response)
+	}
+
+	const handleInputChange = (e: React.ChangeEvent<HTMLInputElement>) => {
+		const query = e.target.value
+		setSearchQuery(query)
+		if (timeoutRef.current) {
+			clearTimeout(timeoutRef.current)
+		}
+		timeoutRef.current = setTimeout(() => {
+			if (query === searchQuery) {
+				searchGame(query)
+			}
+		}, 300)
+	}
+
+	useEffect(() => {
+		return () => {
+			if (timeoutRef.current) {
+				clearTimeout(timeoutRef.current)
+			}
+		}
+	}, [])
 
 	useEffect(() => {
 		const fetchUser = async () => {
@@ -24,22 +54,23 @@ export const Toolbar = ({selected, searchActive, isLight} : {selected : string, 
 		fetchUser()
 	}, [])
 
-	const [searchQuery, setSearchQuery] = useState("")
-	
-	const searchGame = async () => {
-		const response = await fetch(`https://unihack-532x.onrender.com/search-game?game=${searchQuery}`)
-			.then(response => response.json())
-		window.location.href = `/games/${response[0].id}`
-	}
-
 	return (
 		<div className={`flex flex-col items-center ${isLight ? 'bg-[#F4EDED] text-[#0D0D0D]' : 'bg-[#0D0D0D] text-[#F4EDED]'}`}>
-			<div className="flex flex-row items-center justify-center p-6 gap-x-16 bg-transparent">
+			<div className="flex flex-row items-center justify-center p-6 gap-x-16 bg-transparent relative">
 				<button onClick={() => {window.location.href = '/'}} className="text-2xl font-bold">GameDB</button>
 				<button onClick={() => {}} className={`mt-1 ${selected === "Popular Games" ? "text-blue-500" : ""}`}>Popular Games</button>
 				{ searchActive ? 
 				<>
-					<input onChange={(e) => {setSearchQuery(e.target.value)}} onKeyDown={(e) => {if(e.key === "Enter") searchGame()}} value={searchQuery} className={`w-90 h-1/2 p-1 border-b-2 ${isLight ? 'border-[#0D0D0D]' : 'border-[#F4EDED]'}`}  placeholder="Search"></input>
+					<input onChange={handleInputChange} onKeyDown={(e) => {if(e.key === "Enter") searchGame(searchQuery)}} value={searchQuery} className={`w-90 h-1/2 p-1 border-b-2 ${isLight ? 'border-[#0D0D0D]' : 'border-[#F4EDED]'}`}  placeholder="Search"></input>
+					{searchResults.length > 0 && (
+						<div className="absolute top-full left-0 w-full bg-white border border-gray-300 mt-1 z-30">
+							{searchResults.map((result: any) => (
+								<div key={result.id} className="text-black p-2 hover:bg-gray-200 cursor-pointer" onClick={() => window.location.href = `/games/${result.id}`}>
+									{result.name}
+								</div>
+							))}
+						</div>
+					)}
 					{user ?
 					<>
 						<DropdownMenu modal={false}>
