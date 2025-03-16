@@ -25,7 +25,7 @@ my_database = my_client.get_database(
     token=ASTRA_DB_APPLICATION_TOKEN,
 )
 
-collection = my_database.get_collection("game_data")
+collection = my_database.get_collection("games_data")
 
 @app.route("/")
 def home():
@@ -35,7 +35,7 @@ def home():
 def searchGame():
     game = request.args.get('game')
 
-    game_data = collection.find({}, sort={"$vectorize": game})
+    game_data = collection.find({}, sort={"$vectorize": game}, limit=10)
     res = []
 
     if game_data:
@@ -45,7 +45,6 @@ def searchGame():
             if i > 10:
                 break
             res.append(doc)
-
         return jsonify(res)
 
     else:
@@ -75,6 +74,34 @@ def searchId():
         },
         data=f'fields *; limit 1; where id = {gameId};'
     )
+
+    '''
+    if response.json():
+        gameName = response.json()[0]['name']
+        game_data = collection.find({}, sort={"$vectorize": gameName}, limit=10)
+        res = None
+
+        if game_data:
+            for doc in game_data:
+                if doc['name'] == gameName:
+                    res = doc
+                    break
+        if not res:
+            print("asd")
+            steam_res = requests.get(f'https://api.steampowered.com/api/appdetails?appids={gameId}')
+            print(steam_res)
+            if steam_res.json()[gameId]['success']:
+                res = steam_res.json()[gameId]['data']
+                print(res)
+
+        if res:
+            combined_result = response.json()[0]
+            combined_result.update({"database_result": res})
+            return jsonify(combined_result)
+        else:
+            return response.json()
+        
+    '''
     return response.json()
 
 if __name__ == "__main__":
