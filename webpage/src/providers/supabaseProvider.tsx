@@ -59,6 +59,7 @@ export const SupabaseProvider = ({ children }: { children: ReactNode }) => {
 	const signOut = async () => {
 		try {
 			const { error } = await supabase.auth.signOut();
+			document.cookie = "access_token=1;";
 			if (error) throw error;
 			window.location.reload();
 		} catch (error) {

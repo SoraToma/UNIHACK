@@ -2,6 +2,8 @@ import { useState } from "react"
 import { Toolbar } from "@/components/Toolbar"
 
 export const Home = () => {
+	
+
 	const [searchQuery, setSearchQuery] = useState("")
 
 	const searchGame = async () => {
