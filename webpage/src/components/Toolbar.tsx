@@ -57,7 +57,7 @@ export const Toolbar = ({selected, searchActive, isLight} : {selected : string, 
 	return (
 		<div className={`flex flex-col items-center ${isLight ? 'bg-[#F4EDED] text-[#0D0D0D]' : 'bg-[#0D0D0D] text-[#F4EDED]'}`}>
 			<div className="flex flex-row items-center justify-center p-6 gap-x-16 bg-transparent relative">
-				<button onClick={() => {window.location.href = '/'}} className="text-2xl font-bold">GameDB</button>
+				<button onClick={() => {window.location.href = '/'}} className="text-2xl font-bold">SkibiDB</button>
 				<button onClick={() => {}} className={`mt-1 ${selected === "Popular Games" ? "text-blue-500" : ""}`}>Popular Games</button>
 				{ searchActive ? 
 				<>

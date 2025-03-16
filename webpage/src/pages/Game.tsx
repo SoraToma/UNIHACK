@@ -62,6 +62,15 @@ export const Game = () => {
 						</div>
 					</div>
 				</div>
+				<div className='bg-[#464D77] w-full h-auto p-20'>
+					<div className='flex flex-col m-auto w-9/10 items-start gap-y-2 mb-50'>
+						<h1 className='text-3xl text-[#F4EDED] font-bold'>Write a Review</h1>
+						<textarea 
+							className='w-full h-40 p-2 mt-2 text-lg outline-2 text-[#F4EDED] rounded-md' 
+							placeholder='Write your review here...'
+						></textarea>
+					</div>
+				</div>
 				<pre>{JSON.stringify(gameData, null, 2)}</pre>
 			</div>
 		</div>

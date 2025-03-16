@@ -38,7 +38,7 @@ export const Home = () => {
 		<div className="flex flex-col items-center h-auto">
 			<Toolbar selected="Home" searchActive={false} isLight={true} />
 			<div className="flex flex-col items-start p-6">
-				<h1 className="text-4xl font-bold mt-12">Welcome to GameDB</h1>
+				<h1 className="text-4xl font-bold mt-12">Welcome to SkibiDB</h1>
 				<p className="text-xl mt-4">The best place to find information about your favorite games!</p>
 				<div className="relative">
 					<input onChange={handleInputChange} onKeyDown={(e) => {if(e.key === "Enter") searchGame(searchQuery)}} value={searchQuery} className="mt-8 w-full h-1/2 p-4 border-b-2 border-black" placeholder="Search for games..."></input>
