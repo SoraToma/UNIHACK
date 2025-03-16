@@ -111,11 +111,11 @@ export const Auth = () => {
 					Already have an account? <span onClick={() => setAuthType("signIn")} className="text-sky-700 hover:underline cursor-pointer">Sign In</span>
 				</p>
 				<p className="text-xs text-muted-foreground pt-2">
-					Click <span onClick={() => window.location.href = '/'} className="text-sky-700 hover:underline cursor-pointer">here</span> to return to GameDB without an account
+					Click <span onClick={() => window.location.href = '/'} className="text-sky-700 hover:underline cursor-pointer">here</span> to return to SkibiDB without an account
 				</p>
 			</div>
 			<div className="authInfo translate-x-[-60%] scale-x-1 w-2/3 h-full bg-[#0D0D0D] text-[#F4EDED] pl-40 pr-40 flex flex-col justify-center items-start">
-				<p className="w-full z-20 text-2xl font-bold">{authType === "signIn" ? "Welcome back to GameDB" : "Welcome to GameDB"}</p>
+				<p className="w-full z-20 text-2xl font-bold">{authType === "signIn" ? "Welcome back to SkibiDB" : "Welcome to SkibiDB"}</p>
 				<p className="z-20 text-lg">{authType === "signIn" ? "Sign In to your account to view our collection of Games and DLC's" : "Sign Up to your account to view our collection of Games and DLC's"}</p>
 			</div>
 			<div className="SignInForm bg-surface-0 p-6 w-1/3 text-right">
@@ -146,7 +146,7 @@ export const Auth = () => {
 					Already have an account? <span onClick={() => setAuthType("signUp")} className="text-sky-700 hover:underline cursor-pointer">Sign In</span>
 				</p>
 				<p className="text-xs text-muted-foreground pt-2">
-					Click <span onClick={() => window.location.href = '/'} className="text-sky-700 hover:underline cursor-pointer">here</span> to return to GameDB without an account
+					Click <span onClick={() => window.location.href = '/'} className="text-sky-700 hover:underline cursor-pointer">here</span> to return to SkibiDB without an account
 				</p>
 			</div>
 		</div>
